@@ -2,6 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const routes = require('./routes');
+// Подключение к базе данных
+const sequelize = require('./config/database');
+// Подключение модели пользователя
+const User = require('./models/User');
 
 const app = express();
 
@@ -17,8 +21,17 @@ db.sequelize.sync().then(() => {
     console.error("Failed to synchronize database:", err);
 });
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+// Синхронизация модели с базой данных
+User.sync({ force: true })
+  .then(() => {
+    console.log('Таблица пользователей создана');
+    // Запуск сервера
+    app.listen(PORT, () => {
+      console.log(`Сервер работает на порту ${PORT}`);
+    });
+  })
+  .catch(error => {
+    console.error('Ошибка при создании таблицы пользователей:', error);
+  });
+  
+module.exports = app;

@@ -15,7 +15,9 @@
         </li>
         <li class="auth-buttons">
           <button @click="login">Войти</button>
-          <button @click="register">Регистрация</button>
+          <router-link to="/register">
+            <button>Регистрация</button>
+          </router-link>
         </li>
       </ul>
     </nav>
@@ -27,10 +29,10 @@ export default {
   name: 'AppHeader',
   methods: {
     login() {
-      // Логика для входа
+      alert('Функция входа еще не реализована.');
     },
     register() {
-      // Логика для регистрации
+      alert('Функция регистрации еще не реализована.');
     }
   }
 }
