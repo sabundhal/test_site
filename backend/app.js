@@ -3,9 +3,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const routes = require('./routes');
 // Подключение к базе данных
-const sequelize = require('./config/database');
-// Подключение модели пользователя
 const User = require('./models/User');
+const sequelize = require('./config/database');
+
 
 const app = express();
 
@@ -21,8 +21,9 @@ db.sequelize.sync().then(() => {
     console.error("Failed to synchronize database:", err);
 });
 
+const PORT = process.env.PORT || 5000;
 // Синхронизация модели с базой данных
-User.sync({ force: true })
+User.sync({ alter: true })
   .then(() => {
     console.log('Таблица пользователей создана');
     // Запуск сервера

@@ -7,6 +7,8 @@ const { Pool } = require('pg');
 const dotenv = require('dotenv');
 const app = require('./app');  // Подключаем app.js если он существует
 
+
+
 // Загружаем переменные окружения из .env файла
 dotenv.config();
 
@@ -18,23 +20,13 @@ const pool = new Pool({
   }
 });
 
-// Маршрут для регистрации
-app.post('/register', async (req, res) => {
-  const { name, email, password } = req.body;
-  try {
-    const result = await pool.query(
-      'INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *',
-      [name, email, password]
-    );
-    res.status(201).json(result.rows[0]);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Ошибка при регистрации' });
-  }
-});
+
+
 
 // Запуск сервера
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5001;
 app.listen(port, () => {
   console.log(`Сервер работает на http://localhost:${port}`);
 });
+
+

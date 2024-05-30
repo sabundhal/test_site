@@ -24,6 +24,10 @@ const User = db.define('User', {
     allowNull: false
   },
   
+}, {
+  tableName: 'Users', // явно указываем имя таблицы
+  timestamps: true,
 });
+
 
 module.exports = User;
