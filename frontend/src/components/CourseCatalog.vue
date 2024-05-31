@@ -10,8 +10,24 @@
 </template>
 
 <script>
+import axios from '../axios';
 export default {
   name: 'CourseCatalog',
+  data(){
+    return {
+ courses: [], // Добавьте массив для хранения данных каталога
+    };
+  },
+ 
+async created() {
+    try {
+      const response = await axios.get('http://localhost:5000/api/catalog');
+       this.courses = response.data; // Записываем данные каталога в массив 
+      // Обработка данных каталога
+    } catch (error) {
+      console.error('Ошибка при загрузке каталога:', error);
+    }
+  }
 };
 </script>
 

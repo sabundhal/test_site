@@ -14,7 +14,9 @@
           </select>
         </li>
         <li class="auth-buttons">
-          <button @click="login">Войти</button>
+        <router-link to="/login">
+            <button>Войти</button>
+          </router-link>
           <router-link to="/register">
             <button>Регистрация</button>
           </router-link>
